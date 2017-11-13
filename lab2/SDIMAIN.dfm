@@ -1,8 +1,7 @@
 object SDIAppForm: TSDIAppForm
   Left = 197
   Top = 111
-  ActiveControl = Memo1
-  Caption = 'SDI Application'
+  Caption = 'Form1'
   ClientHeight = 197
   ClientWidth = 352
   Color = clBtnFace
@@ -13,17 +12,9 @@ object SDIAppForm: TSDIAppForm
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
-  PopupMenu = PopupMenu1
-  OnActivate = FormActivate
+  WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 16
-  object Label1: TLabel
-    Left = 8
-    Top = 2
-    Width = 62
-    Height = 16
-    Caption = 'FileName'
-  end
   object StatusBar: TStatusBar
     Left = 0
     Top = 178
@@ -38,21 +29,19 @@ object SDIAppForm: TSDIAppForm
     SimplePanel = True
     ExplicitLeft = 7
   end
-  object Edit1: TEdit
-    Left = 8
-    Top = 22
-    Width = 336
-    Height = 21
-    TabOrder = 1
-    Text = 'memos.txt'
-  end
   object Memo1: TMemo
-    Left = 8
-    Top = 49
-    Width = 336
-    Height = 124
+    Left = 0
+    Top = 0
+    Width = 352
+    Height = 178
+    Align = alClient
     ScrollBars = ssBoth
-    TabOrder = 2
+    TabOrder = 1
+    Visible = False
+    ExplicitLeft = 8
+    ExplicitTop = 49
+    ExplicitWidth = 336
+    ExplicitHeight = 124
   end
   object MainMenu1: TMainMenu
     Images = ImageList1
@@ -69,9 +58,15 @@ object SDIAppForm: TSDIAppForm
       end
       object FileSaveItem: TMenuItem
         Action = FileSave1
+        Enabled = False
       end
       object FileSaveAsItem: TMenuItem
         Action = FileSaveAs1
+        Enabled = False
+      end
+      object FileCloseItem: TMenuItem
+        Action = FileClose1
+        Enabled = False
       end
       object N1: TMenuItem
         Caption = '-'
@@ -120,7 +115,12 @@ object SDIAppForm: TSDIAppForm
       Category = 'File'
       Caption = 'Save &As...'
       Hint = 'Save As|Save current file with different name'
-      OnExecute = FileSave1Execute
+      OnExecute = FileSaveAs1Execute
+    end
+    object FileClose1: TAction
+      Category = 'File'
+      Caption = 'Close'
+      OnExecute = FileClose1Execute
     end
     object FileExit1: TAction
       Category = 'File'
@@ -675,26 +675,19 @@ object SDIAppForm: TSDIAppForm
       000000000000}
   end
   object OpenDialog: TOpenDialog
-    Filter = 'All Files (*.*)|*.*'
+    DefaultExt = '.txt'
+    FileName = 'memos'
+    Filter = 'All Files (*.txt)|*.txt'
+    Title = 'Open memos'
     Left = 104
     Top = 152
   end
   object SaveDialog: TSaveDialog
-    Filter = 'All Files (*.*)|*.*'
+    DefaultExt = '.txt'
+    FileName = 'memos'
+    Filter = 'All Files (*.txt)|*.txt'
+    Title = 'Save memos'
     Left = 136
     Top = 152
-  end
-  object PopupMenu1: TPopupMenu
-    Left = 168
-    Top = 152
-    object Save1: TMenuItem
-      Action = FileSave1
-    end
-    object About1: TMenuItem
-      Action = HelpAbout1
-    end
-    object Exit1: TMenuItem
-      Action = FileExit1
-    end
   end
 end

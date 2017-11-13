@@ -30,19 +30,16 @@ type
     FileExitItem: TMenuItem;
     Help1: TMenuItem;
     HelpAboutItem: TMenuItem;
-    PopupMenu1: TPopupMenu;
-    Save1: TMenuItem;
-    About1: TMenuItem;
-    Exit1: TMenuItem;
-    Label1: TLabel;
-    Edit1: TEdit;
     Memo1: TMemo;
+    FileClose1: TAction;
+    FileCloseItem: TMenuItem;
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
     procedure FileSave1Execute(Sender: TObject);
+    procedure FileSaveAs1Execute(Sender: TObject);
     procedure FileExit1Execute(Sender: TObject);
     procedure HelpAbout1Execute(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
+    procedure FileClose1Execute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,25 +57,59 @@ uses About;
 
 procedure TSDIAppForm.FileNew1Execute(Sender: TObject);
 begin
-  { Do nothing }
+  Caption := 'Form1';
+  Memo1.Lines.Clear;
+  Memo1.Visible := true;
+  FileSaveItem.Enabled := true;
+  FileSaveAsItem.Enabled := true;
+  FileCloseItem.Enabled := true;
 end;
 
 procedure TSDIAppForm.FileOpen1Execute(Sender: TObject);
 begin
-  OpenDialog.Execute;
+  if OpenDialog.Execute then
+  begin
+    if SysUtils.FileExists(OpenDialog.FileName) then
+      Memo1.Lines.LoadFromFile(OpenDialog.FileName);
+    Memo1.Visible := true;
+    Caption := OpenDialog.FileName;
+    FileSaveItem.Enabled := true;
+    FileSaveAsItem.Enabled := true;
+    FileCloseItem.Enabled := true;
+  end;
 end;
 
 procedure TSDIAppForm.FileSave1Execute(Sender: TObject);
 begin
-  Memo1.Lines.SaveToFile('memos.txt');
+  if Caption = 'Form1' then
+  begin
+    Caption := '';
+    FileSaveAs1Execute(Sender);
+    if Caption = '' then
+      Caption := 'Form1';
+  end
+  else
+    Memo1.Lines.SaveToFile(Caption);
 end;
 
-procedure TSDIAppForm.FormActivate(Sender: TObject);
+procedure TSDIAppForm.FileSaveAs1Execute(Sender: TObject);
 begin
-  if SysUtils.FileExists('memos.txt') then
-    Memo1.Lines.LoadFromFile('memos.txt')
-  else
-    Memo1.Lines.SaveToFile('memos.txt');
+  SaveDialog.InitialDir := ExtractFileDir(Caption);
+  SaveDialog.FileName := ExtractFileName(Caption);
+  if SaveDialog.Execute then
+  begin
+    Memo1.Lines.SaveToFile(SaveDialog.FileName);
+    Caption := SaveDialog.FileName;
+  end;
+end;
+
+procedure TSDIAppForm.FileClose1Execute(Sender: TObject);
+begin
+    Memo1.Visible := false;
+    Caption := 'Form1';
+    FileSaveItem.Enabled := false;
+    FileSaveAsItem.Enabled := false;
+    FileCloseItem.Enabled := false;
 end;
 
 procedure TSDIAppForm.FileExit1Execute(Sender: TObject);
