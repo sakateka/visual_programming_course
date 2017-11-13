@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages,
   System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.FileCtrl, Vcl.ExtCtrls,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls, Vcl.Buttons;
 
 type
   TForm1 = class(TForm)
@@ -17,11 +17,16 @@ type
     DriveComboBox1: TDriveComboBox;
     FilterComboBox1: TFilterComboBox;
     StatusBar1: TStatusBar;
+    Image1: TImage;
+    SpeedButton1: TSpeedButton;
+    Label1: TLabel;
+    Label2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FileListBox1Change(Sender: TObject);
     procedure DirectoryListBox1Change(Sender: TObject);
     procedure SetStatusBarTextAndWidth(textP1, textP2: String);
     procedure SetFileFilter();
+    procedure SetImagePreview(Fname: String);
   private
     { Private declarations }
   public
@@ -40,6 +45,7 @@ begin
   SetFileFilter;
   DirectoryListBox1.Align := alLeft;
   DirectoryListBox1.Width := Form1.ClientWidth div 3;
+  Image1.Width := Form1.ClientWidth div 3;
   Splitter1.Left := DirectoryListBox1.Left + DirectoryListBox1.Width + 1;
   Splitter1.Align := DirectoryListBox1.Align;
   Splitter1.Width := 4;
@@ -55,11 +61,14 @@ begin
 end;
 
 procedure TForm1.FileListBox1Change(Sender: TObject);
-
+   var FName: String;
 begin
   if FileListBox1.ItemIndex >= 0 then
-    SetStatusBarTextAndWidth(DirectoryListBox1.Directory, FileListBox1.Items[FileListBox1.ItemIndex]);
-
+  begin
+    FName := FileListBox1.Items[FileListBox1.ItemIndex];
+    SetStatusBarTextAndWidth(DirectoryListBox1.Directory, FName);
+    SetImagePreview(FName);
+  end
 end;
 
 procedure TForm1.SetStatusBarTextAndWidth(textP1, textP2: String);
@@ -101,5 +110,13 @@ begin
   FilterComboBox1.Filter := 'All files (*.*)|*.*';
   for ext in dict.Keys do
     FilterComboBox1.Filter :=  FilterComboBox1.Filter + '|' + '*' + ext + '|' + '*' + ext;
+end;
+
+procedure TForm1.SetImagePreview(FName: String);
+begin
+  if LowerCase(ExtractFileExt(FName)) = '.bmp' then
+    Image1.Picture.LoadFromFile(FName)
+  else
+    Image1.Picture.Assign(nil);
 end;
 end.
