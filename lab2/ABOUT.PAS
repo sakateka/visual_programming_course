@@ -1,0 +1,24 @@
+unit ABOUT;
+
+interface
+
+uses Winapi.Windows, System.Classes, Vcl.Graphics, Vcl.Forms, Vcl.Controls,
+  Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TAboutBox = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  AboutBox: TAboutBox;
+
+implementation
+
+{$R *.dfm}
+
+end.
+ 
