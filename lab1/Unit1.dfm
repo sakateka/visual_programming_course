@@ -53,7 +53,7 @@ object Form1: TForm1
     DirLabel = Label1
     FileList = FileListBox1
     TabOrder = 1
-    ExplicitHeight = 218
+    OnChange = DirectoryListBox1Change
   end
   object FileListBox1: TFileListBox
     Left = 257
@@ -64,9 +64,6 @@ object Form1: TForm1
     ItemHeight = 13
     TabOrder = 2
     OnChange = FileListBox1Change
-    ExplicitLeft = 272
-    ExplicitWidth = 360
-    ExplicitHeight = 218
   end
   object Panel2: TPanel
     Left = 0
@@ -89,7 +86,6 @@ object Form1: TForm1
       Width = 145
       Height = 21
       FileList = FileListBox1
-      Filter = 'All files (*.*)|*.*|Pascal (*.pas)|*.pas'
       TabOrder = 1
     end
   end

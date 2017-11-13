@@ -3,8 +3,9 @@ unit Unit1;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.FileCtrl, Vcl.ExtCtrls;
+  Winapi.Windows, Winapi.Messages,
+  System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.FileCtrl, Vcl.ExtCtrls;
 
 type
   TForm1 = class(TForm)
@@ -18,6 +19,7 @@ type
     Label1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FileListBox1Change(Sender: TObject);
+    procedure DirectoryListBox1Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,6 +32,22 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.DirectoryListBox1Change(Sender: TObject);
+  var dict: TDictionary<String, boolean>;
+  ext: String;
+  FName: String;
+begin
+  dict := TDictionary<String, boolean>.Create;
+  for FName in FileListBox1.Items do
+  begin
+     ext := ExtractFileExt(FName);
+     dict.AddOrSetValue(ext, True);
+  end;
+  FilterComboBox1.Filter := 'All files (*.*)|*.*';
+  for ext in dict.Keys do
+    FilterComboBox1.Filter :=  FilterComboBox1.Filter + '|' + '*' + ext + '|' + '*' + ext;
+end;
 
 procedure TForm1.FileListBox1Change(Sender: TObject);
   var F: TSearchRec;
