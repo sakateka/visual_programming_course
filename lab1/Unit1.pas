@@ -27,6 +27,7 @@ type
     procedure SetStatusBarTextAndWidth(textP1, textP2: String);
     procedure SetFileFilter();
     procedure SetImagePreview(Fname: String);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -75,12 +76,17 @@ procedure TForm1.SetStatusBarTextAndWidth(textP1, textP2: String);
   var F: TSearchRec;
       PanelWidth: Integer;
       formattedTime: String;
+      TimeWidth: Integer;
 begin
   StatusBar1.Canvas.Font := StatusBar1.Font;
   DateTimeToString(formattedTime, '  hh:nn:ss      ', Time);
   StatusBar1.Panels[2].Text := formattedTime;
-  StatusBar1.Panels[2].Width := StatusBar1.Canvas.TextWidth(StatusBar1.Panels[2].Text);
-  PanelWidth := StatusBar1.Width - StatusBar1.Panels[2].Width;
+  TimeWidth := 0;
+  if SpeedButton1.Down then
+    TimeWidth := StatusBar1.Canvas.TextWidth(StatusBar1.Panels[2].Text);
+
+  StatusBar1.Panels[2].Width := TimeWidth;
+  PanelWidth := StatusBar1.Width - TimeWidth;
 
 
   if textP2.Length > 0 then
@@ -94,6 +100,15 @@ begin
     textP1 := MinimizeName(textP1, StatusBar1.Canvas, PanelWidth - 6);
   StatusBar1.Panels[0].Text := textP1;
   StatusBar1.Panels[0].Width := PanelWidth;
+end;
+
+procedure TForm1.SpeedButton1Click(Sender: TObject);
+  var FName: String;
+begin
+  FName := '';
+  if FileListBox1.ItemIndex >= 0 then
+    FName := FileListBox1.Items[FileListBox1.ItemIndex];
+  SetStatusBarTextAndWidth(DirectoryListBox1.Directory, FName);
 end;
 
 procedure TForm1.SetFileFilter();
