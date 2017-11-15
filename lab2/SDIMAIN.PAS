@@ -57,8 +57,6 @@ var
 
 implementation
 
-uses About;
-
 {$R *.dfm}
 
 procedure TSDIAppForm.FileNew1Execute(Sender: TObject);
