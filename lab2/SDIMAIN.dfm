@@ -27,7 +27,6 @@ object SDIAppForm: TSDIAppForm
     AutoHint = True
     Panels = <>
     SimplePanel = True
-    ExplicitLeft = 7
   end
   object Memo1: TMemo
     Left = 0
@@ -38,10 +37,6 @@ object SDIAppForm: TSDIAppForm
     ScrollBars = ssBoth
     TabOrder = 1
     Visible = False
-    ExplicitLeft = 8
-    ExplicitTop = 49
-    ExplicitWidth = 336
-    ExplicitHeight = 124
   end
   object MainMenu1: TMainMenu
     Images = ImageList1
@@ -55,6 +50,30 @@ object SDIAppForm: TSDIAppForm
       end
       object FileOpenItem: TMenuItem
         Action = FileOpen1
+      end
+      object FileReopenItem: TMenuItem
+        Caption = 'Reopen'
+        Enabled = False
+        object Name01: TMenuItem
+          Caption = 'Name1'
+          Visible = False
+          OnClick = ItemClick
+        end
+        object Name11: TMenuItem
+          Caption = 'Name2'
+          Visible = False
+          OnClick = ItemClick
+        end
+        object Name21: TMenuItem
+          Caption = 'Name3'
+          Visible = False
+          OnClick = ItemClick
+        end
+        object Name41: TMenuItem
+          Caption = 'Name4'
+          Visible = False
+          OnClick = ItemClick
+        end
       end
       object FileSaveItem: TMenuItem
         Action = FileSave1
@@ -73,6 +92,7 @@ object SDIAppForm: TSDIAppForm
       end
       object FileExitItem: TMenuItem
         Action = FileExit1
+        ShortCut = 32856
       end
     end
     object Help1: TMenuItem
@@ -139,7 +159,7 @@ object SDIAppForm: TSDIAppForm
     Left = 72
     Top = 152
     Bitmap = {
-      494C01010F001300100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F001300140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
