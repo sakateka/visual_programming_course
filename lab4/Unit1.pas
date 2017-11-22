@@ -67,6 +67,7 @@ type
     procedure Button8Click(Sender: TObject);
     procedure Button10Click(Sender: TObject);
     procedure Button9Click(Sender: TObject);
+    procedure Button11Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -85,6 +86,21 @@ implementation
 procedure TForm1.Button10Click(Sender: TObject);
 begin
   tbStd.MoveBy(StrToInt(SpinEdit1.Text));
+end;
+
+procedure TForm1.Button11Click(Sender: TObject);
+  var i: Integer;
+begin
+  if Edit1.Text <> '' then
+  begin
+    tbStd.First;
+    for i := 0 to tbStd.RecordCount -1 do
+    begin
+      if String(tbStd.FieldByName('St_FIO').Value).Trim().Equals(Edit1.Text) then
+        break;
+      tbStd.Next;
+    end;
+  end;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
