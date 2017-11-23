@@ -68,6 +68,8 @@ type
     procedure Button10Click(Sender: TObject);
     procedure Button9Click(Sender: TObject);
     procedure Button11Click(Sender: TObject);
+    procedure Edit2KeyPress(Sender: TObject; var Key: Char);
+    procedure Edit3Change(Sender: TObject);
 
   private
     { Private declarations }
@@ -90,6 +92,7 @@ end;
 
 procedure TForm1.Button11Click(Sender: TObject);
   var i: Integer;
+  var found: boolean;
 begin
   if Edit1.Text <> '' then
   begin
@@ -97,9 +100,14 @@ begin
     for i := 0 to tbStd.RecordCount -1 do
     begin
       if String(tbStd.FieldByName('St_FIO').Value).Trim().Equals(Edit1.Text) then
+      begin
+        found := true;
         break;
+      end;
       tbStd.Next;
     end;
+    if not found then
+      tbStd.First;
   end;
 end;
 
@@ -166,6 +174,26 @@ begin
   if tbStd.IndexFieldNames = 'G_Num;St_FIO'
   then tbStd.IndexFieldNames := 'G_Num;'
   else tbStd.IndexFieldNames := 'G_Num;St_FIO';
+end;
+
+procedure TForm1.Edit2KeyPress(Sender: TObject; var Key: Char);
+begin
+  if ord(Key) = VK_RETURN then
+    if not tbStd.Locate('St_FIO', Edit2.Text, [loPartialKey]) then
+      Edit2.Color := clWebOrangeRed
+    else
+      Edit2.Color := clWindow;
+end;
+
+procedure TForm1.Edit3Change(Sender: TObject);
+begin
+  if Edit3.Text <> '' then
+    if not tbStd.Locate('St_FIO', Edit3.Text, [loPartialKey]) then
+      Edit3.Color := clWebOrangeRed
+    else
+      Edit3.Color := clWindow
+  else
+   Edit3.Color := clWindow;
 end;
 
 end.

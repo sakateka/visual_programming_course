@@ -199,8 +199,8 @@ object Form1: TForm1
     OnClick = Button10Click
   end
   object Button11: TButton
-    Left = 512
-    Top = 304
+    Left = 376
+    Top = 402
     Width = 107
     Height = 25
     Caption = #1055#1086#1080#1089#1082' '#1087#1077#1088#1077#1073#1086#1088#1086#1084
@@ -220,6 +220,7 @@ object Form1: TForm1
     Width = 191
     Height = 21
     TabOrder = 17
+    OnKeyPress = Edit2KeyPress
   end
   object Edit3: TEdit
     Left = 695
@@ -227,6 +228,7 @@ object Form1: TForm1
     Width = 170
     Height = 21
     TabOrder = 18
+    OnChange = Edit3Change
   end
   object SpinEdit1: TSpinEdit
     Left = 625
