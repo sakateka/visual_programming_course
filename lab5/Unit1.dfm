@@ -128,6 +128,15 @@ object Form1: TForm1
     NumGlyphs = 2
     TabOrder = 8
   end
+  object Button1: TButton
+    Left = 506
+    Top = 80
+    Width = 81
+    Height = 25
+    Caption = #1047#1072#1076#1072#1085#1080#1077' '#8470'2'
+    TabOrder = 9
+    OnClick = Button1Click
+  end
   object IBQuery1: TIBQuery
     Database = IBDatabase1
     Transaction = IBTransaction1

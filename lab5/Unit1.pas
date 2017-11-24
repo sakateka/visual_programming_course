@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, IBX.IBDatabase,
   IBX.IBCustomDataSet, IBX.IBQuery, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.Buttons, System.RegularExpressions;
+  Vcl.DBGrids, Vcl.Buttons, System.RegularExpressions, Unit2;
 
 type
   TForm1 = class(TForm)
@@ -27,6 +27,7 @@ type
     Label4: TLabel;
     TabControl1: TTabControl;
     BitBtn1: TBitBtn;
+    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnAllClick(Sender: TObject);
     procedure btnC3dotClick(Sender: TObject);
@@ -34,6 +35,7 @@ type
     procedure btnContinentClick(Sender: TObject);
     procedure btnSortClick(Sender: TObject);
     procedure TabControl1Change(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -92,6 +94,12 @@ begin
     query := regex.Replace(query, ';.*$', ' order by population asc;');
   IBQuery1.SQL.Text := query;
   IBQuery1.Open;
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  Application.CreateForm(TForm2, Form2);
+  Form2.Show;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
