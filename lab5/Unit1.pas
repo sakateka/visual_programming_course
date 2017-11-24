@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, IBX.IBDatabase,
   IBX.IBCustomDataSet, IBX.IBQuery, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.Buttons;
+  Vcl.DBGrids, Vcl.Buttons, System.RegularExpressions;
 
 type
   TForm1 = class(TForm)
@@ -78,9 +78,19 @@ begin
 end;
 
 procedure TForm1.btnSortClick(Sender: TObject);
+  var query: String;
+      regex: TRegEx;
 begin
   IBQuery1.Close;
-  IBQuery1.SQL.Text := 'select * from Country order by population;';
+  query := IBQuery1.SQL.Text;
+  if query.ToLower.Contains('order by') then
+    if query.ToLower.Contains(' asc;') then
+      query := regex.Replace(query, ' asc;.*', ' desc;', [roIgnoreCase])
+    else
+      query := regex.Replace(query, ' desc;.*', ' asc;', [roIgnoreCase])
+  else
+    query := regex.Replace(query, ';.*$', ' order by population asc;');
+  IBQuery1.SQL.Text := query;
   IBQuery1.Open;
 end;
 
