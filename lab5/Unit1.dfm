@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 458
-  ClientWidth = 639
+  ClientHeight = 401
+  ClientWidth = 644
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -35,29 +35,22 @@ object Form1: TForm1
     Height = 13
     Caption = 'Population:'
   end
-  object btnClose: TSpeedButton
-    Left = 480
-    Top = 35
-    Width = 57
-    Height = 22
-    Caption = 'Close'
-  end
   object Label4: TLabel
     Left = 24
-    Top = 384
+    Top = 360
     Width = 33
     Height = 13
     Caption = 'Capital'
   end
   object DBGrid1: TDBGrid
     Left = 8
-    Top = 144
-    Width = 623
+    Top = 135
+    Width = 628
     Height = 193
     TabStop = False
     DataSource = DataSource1
     ReadOnly = True
-    TabOrder = 0
+    TabOrder = 7
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -70,7 +63,8 @@ object Form1: TForm1
     Width = 75
     Height = 25
     Caption = 'All'
-    TabOrder = 1
+    TabOrder = 0
+    OnClick = btnAllClick
   end
   object btnSAmerica: TButton
     Left = 136
@@ -78,7 +72,8 @@ object Form1: TForm1
     Width = 89
     Height = 25
     Caption = 'South America'
-    TabOrder = 2
+    TabOrder = 3
+    OnClick = btnContinentClick
   end
   object btnSort: TButton
     Left = 264
@@ -86,7 +81,8 @@ object Form1: TForm1
     Width = 75
     Height = 25
     Caption = 'Sort'
-    TabOrder = 3
+    TabOrder = 5
+    OnClick = btnSortClick
   end
   object btnC3dot: TButton
     Left = 24
@@ -94,7 +90,8 @@ object Form1: TForm1
     Width = 75
     Height = 25
     Caption = 'C...'
-    TabOrder = 4
+    TabOrder = 1
+    OnClick = btnC3dotClick
   end
   object btn3dotC3dot: TButton
     Left = 24
@@ -102,7 +99,8 @@ object Form1: TForm1
     Width = 75
     Height = 25
     Caption = '...C...'
-    TabOrder = 5
+    TabOrder = 2
+    OnClick = btn3dotC3dotClick
   end
   object btnNAmerica: TButton
     Left = 136
@@ -110,14 +108,25 @@ object Form1: TForm1
     Width = 89
     Height = 25
     Caption = 'North America'
-    TabOrder = 6
+    TabOrder = 4
+    OnClick = btnContinentClick
   end
   object TabControl1: TTabControl
     Left = 69
-    Top = 374
-    Width = 551
+    Top = 350
+    Width = 567
     Height = 33
-    TabOrder = 7
+    TabOrder = 6
+    OnChange = TabControl1Change
+  end
+  object BitBtn1: TBitBtn
+    Left = 512
+    Top = 35
+    Width = 75
+    Height = 25
+    Kind = bkClose
+    NumGlyphs = 2
+    TabOrder = 8
   end
   object IBQuery1: TIBQuery
     Database = IBDatabase1
@@ -128,8 +137,8 @@ object Form1: TForm1
     ParamCheck = True
     SQL.Strings = (
       'select * from country;')
-    Left = 120
-    Top = 416
+    Left = 256
+    Top = 352
   end
   object IBDatabase1: TIBDatabase
     Connected = True
@@ -142,18 +151,18 @@ object Form1: TForm1
     LoginPrompt = False
     DefaultTransaction = IBTransaction1
     ServerType = 'IBServer'
-    Left = 8
-    Top = 416
+    Left = 168
+    Top = 352
   end
   object IBTransaction1: TIBTransaction
     Active = True
     DefaultDatabase = IBDatabase1
-    Left = 56
-    Top = 416
+    Left = 216
+    Top = 352
   end
   object DataSource1: TDataSource
     DataSet = IBQuery1
-    Left = 168
-    Top = 416
+    Left = 312
+    Top = 352
   end
 end
