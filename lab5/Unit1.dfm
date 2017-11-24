@@ -11,30 +11,31 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 40
+    Left = 48
     Top = 8
     Width = 31
     Height = 13
-    Caption = 'Label1'
+    Caption = 'Name:'
   end
   object Label2: TLabel
-    Left = 160
+    Left = 152
     Top = 8
-    Width = 31
+    Width = 51
     Height = 13
-    Caption = 'Label1'
+    Caption = 'Continent:'
   end
   object Label3: TLabel
-    Left = 288
+    Left = 272
     Top = 8
-    Width = 31
+    Width = 54
     Height = 13
-    Caption = 'Label1'
+    Caption = 'Population:'
   end
-  object SpeedButton1: TSpeedButton
+  object btnClose: TSpeedButton
     Left = 480
     Top = 35
     Width = 57
@@ -44,16 +45,18 @@ object Form1: TForm1
   object Label4: TLabel
     Left = 24
     Top = 384
-    Width = 31
+    Width = 33
     Height = 13
-    Caption = 'Label1'
+    Caption = 'Capital'
   end
   object DBGrid1: TDBGrid
     Left = 8
     Top = 144
     Width = 623
     Height = 193
+    TabStop = False
     DataSource = DataSource1
+    ReadOnly = True
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -61,59 +64,59 @@ object Form1: TForm1
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
   end
-  object Button1: TButton
+  object btnAll: TButton
     Left = 24
     Top = 35
     Width = 75
     Height = 25
-    Caption = 'Button1'
+    Caption = 'All'
     TabOrder = 1
   end
-  object Button2: TButton
+  object btnSAmerica: TButton
     Left = 136
     Top = 35
-    Width = 75
+    Width = 89
     Height = 25
-    Caption = 'Button1'
+    Caption = 'South America'
     TabOrder = 2
   end
-  object Button3: TButton
+  object btnSort: TButton
     Left = 264
     Top = 35
     Width = 75
     Height = 25
-    Caption = 'Button1'
+    Caption = 'Sort'
     TabOrder = 3
   end
-  object Button4: TButton
+  object btnC3dot: TButton
     Left = 24
     Top = 66
     Width = 75
     Height = 25
-    Caption = 'Button1'
+    Caption = 'C...'
     TabOrder = 4
   end
-  object Button5: TButton
+  object btn3dotC3dot: TButton
     Left = 24
     Top = 97
     Width = 75
     Height = 25
-    Caption = 'Button1'
+    Caption = '...C...'
     TabOrder = 5
   end
-  object Button6: TButton
+  object btnNAmerica: TButton
     Left = 136
     Top = 66
-    Width = 75
+    Width = 89
     Height = 25
-    Caption = 'Button1'
+    Caption = 'North America'
     TabOrder = 6
   end
   object TabControl1: TTabControl
-    Left = 176
-    Top = 368
-    Width = 441
-    Height = 47
+    Left = 69
+    Top = 374
+    Width = 551
+    Height = 33
     TabOrder = 7
   end
   object IBQuery1: TIBQuery

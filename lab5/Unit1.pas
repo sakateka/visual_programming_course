@@ -18,15 +18,16 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
-    Button4: TButton;
-    Button5: TButton;
-    Button6: TButton;
-    SpeedButton1: TSpeedButton;
-    TabControl1: TTabControl;
+    btnAll: TButton;
+    btnSAmerica: TButton;
+    btnSort: TButton;
+    btnC3dot: TButton;
+    btn3dotC3dot: TButton;
+    btnNAmerica: TButton;
+    btnClose: TSpeedButton;
     Label4: TLabel;
+    TabControl1: TTabControl;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,5 +40,12 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+  var name: Char;
+begin
+  for name := 'A' to 'Z' do
+    TabControl1.Tabs.Add(name);
+end;
 
 end.
