@@ -1,0 +1,66 @@
+SET SQL DIALECT 3;
+
+/* CREATE DATABASE '127.0.0.1/gds_db:C:\Users\IEUser\Documents\Embarcadero\Studio\Projects\visual_programming_course\kr\KRDB.IB' USER 'SYSDBA' password 'Enter Password here' PAGE_SIZE 1024
+ DEFAULT CHARACTER SET UTF8 */
+COMMIT;
+/*CONNECT '127.0.0.1/gds_db:C:\Users\IEUser\Documents\Embarcadero\Studio\Projects\visual_programming_course\kr\KRDB.IB' USER 'SYSDSO' PASSWORD 'Enter Password here'*/
+/* ALTER DATABASE SET SYSTEM ENCRYPTION PASSWORD 'Enter Password here';*/
+COMMIT;
+
+/* Table: DRINKS, Owner: SYSDBA */
+
+CREATE TABLE "DRINKS" 
+(
+  "DRINKID"	INTEGER DEFAULT 0 NOT NULL,
+  "NAME"	CHAR(30),
+  "TYPE"	INTEGER,
+  "COUNT"	INTEGER,
+ PRIMARY KEY ("DRINKID")
+);
+
+/* Table: SOFTDRINKSTYPES, Owner: SYSDBA */
+
+CREATE TABLE "SOFTDRINKSTYPES" 
+(
+  "ID"	INTEGER NOT NULL,
+  "NAME"	CHAR(30),
+  "SUPPLY"	INTEGER,
+  "SOLD"	INTEGER,
+ PRIMARY KEY ("ID")
+);
+ALTER TABLE "DRINKS" ADD FOREIGN KEY ("TYPE") REFERENCES "SOFTDRINKSTYPES" ("ID") ON UPDATE CASCADE ON DELETE CASCADE;
+
+CREATE GENERATOR "GENDRINKID";
+CREATE GENERATOR "GENTYPEID";
+/* Subscriptions */
+COMMIT WORK;
+
+/* Stored procedures */
+
+COMMIT WORK;
+
+/* Triggers only will work for SQL triggers */
+
+CREATE TRIGGER "TRIGGERGENDRINKID" FOR "DRINKS" 
+ACTIVE BEFORE INSERT POSITION 0
+AS
+begin
+  NEW."DRINKID" = gen_id("GENDRINKID", 1);
+end
+ ;
+
+CREATE TRIGGER "TRIGGERGENTYPEID" FOR "SOFTDRINKSTYPES" 
+ACTIVE BEFORE INSERT POSITION 0
+AS
+begin
+  NEW."ID" = gen_id("GENTYPEID", 1);
+end
+ ;
+
+COMMIT WORK ;
+
+/* Grant Roles for this database */
+
+
+/* Grant permissions for this database */
+
