@@ -45,7 +45,7 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  Form2;
+  Unit2.Form2.Show;
 end;
 
 procedure TForm1.Minimum1Click(Sender: TObject);
